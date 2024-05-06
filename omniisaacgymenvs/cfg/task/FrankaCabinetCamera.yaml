@@ -5,7 +5,7 @@ defaults:
 name: FrankaCabinetCamera
 env:
   numEnvs: ${resolve_default:4096,${...num_envs}}
-  envSpacing: 3.0
+  envSpacing: 30.0
 
   cameraWidth: 240
   cameraHeight: 160
