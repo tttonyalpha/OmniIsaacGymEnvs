@@ -57,6 +57,14 @@ import math
 
 from omniisaacgymenvs.tasks.franka_cabinet import  FrankaCabinetTask
 
+
+from omni.isaac.cloner import GridCloner    # import GridCloner interface
+from omni.isaac.core.utils.stage import get_current_stage
+from pxr import UsdGeom
+from omni.isaac.core.prims.xform_prim import XFormPrim
+from omni.isaac.core.utils.stage import add_reference_to_stage, get_current_stage
+
+
 class FrankaCabinetCameraTask(FrankaCabinetTask):
     def __init__(self, name, sim_config, env, offset=None) -> None:
 
@@ -179,6 +187,17 @@ class FrankaCabinetCameraTask(FrankaCabinetTask):
             )
             scene.add(self._props)
 
+        env_prim_path = '/World/Warehouse_0'
+        env_usd_path = '/isaac-sim/OmniIsaacGymEnvs/warehouse_7.usd'
+
+        add_reference_to_stage(usd_path=env_usd_path, prim_path=env_prim_path)
+        scene.add(XFormPrim(prim_path=env_prim_path)) # , name=env_name
+
+        cloner = GridCloner(spacing=self._env_spacing)
+        target_paths = cloner.generate_paths("/World/Warehouse", self._num_envs)
+
+        cloner.clone(source_prim_path="/World/Warehouse_0", prim_paths=target_paths)
+
         self.init_data()
 
         return
@@ -244,3 +263,4 @@ class FrankaCabinetCameraTask(FrankaCabinetTask):
             print("Image tensor is NONE!")
 
         return self.obs_buf
+
