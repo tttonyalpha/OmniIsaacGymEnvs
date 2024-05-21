@@ -46,6 +46,8 @@ def import_tasks():
     from omniisaacgymenvs.tasks.quadcopter import QuadcopterTask
     from omniisaacgymenvs.tasks.shadow_hand import ShadowHandTask
     from omniisaacgymenvs.tasks.franka_cabinet_camera import FrankaCabinetCameraTask
+    from omniisaacgymenvs.tasks.franka_cabinet_warehouse_camera import FrankaCabinetWarehouseCameraTask
+
 
     from omniisaacgymenvs.tasks.warp.ant import AntLocomotionTask as AntLocomotionTaskWarp
     from omniisaacgymenvs.tasks.warp.cartpole import CartpoleTask as CartpoleTaskWarp
@@ -72,7 +74,8 @@ def import_tasks():
         "ShadowHand": ShadowHandTask,
         "ShadowHandOpenAI_FF": ShadowHandTask,
         "ShadowHandOpenAI_LSTM": ShadowHandTask,
-        'FrankaCabinetCamera': FrankaCabinetCameraTask
+        "FrankaCabinetCamera": FrankaCabinetCameraTask,
+        "FrankaCabinetWarehouseCamera": FrankaCabinetWarehouseCameraTask,
     }
 
     task_map_warp = {
